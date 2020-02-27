@@ -8,6 +8,7 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import history from '../../history';
 import { addRestaurants } from '../../redux/actions/restaurants';
 import { serverBaseUrl } from '../../variables';
 
@@ -26,6 +27,15 @@ class ListOfRestaurants extends React.Component {
     });
 
     this.props.addRestaurants(restaurants); // add the restaurants to the redux state
+  }
+
+  componentDidMount() {
+    // if there is no location or latitude and longitude in the redux store, move the user to
+    // the GetLocation component to get a location
+    if (typeof this.props.state.searchInfo.location === 'undefined' &&
+      (typeof this.props.state.searchInfo.latitude === 'undefined' || typeof this.props.state.searchInfo.longitude === 'undefined')) {
+      history.push('/GetLocation');
+    }
   }
 
   render() {
