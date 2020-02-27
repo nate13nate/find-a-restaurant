@@ -1,9 +1,12 @@
+const cors = require('cors');
 const express = require('express');
 
 const getRestaurants = require('./getRestaurants');
 const getARestaurant = require('./getARestaurant');
 
 const app = express();
+
+app.use(cors()); // cors decides which locations can use this server; right now, it is set to any host
 
 // get all restaurants from yelp api
 app.get('/RestaurantsInfo/getRestaurants', async function (req, res) {
