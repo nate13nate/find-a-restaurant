@@ -4,12 +4,35 @@
  * such as the search bar, the sort and filter fields, and the
  * table of restaurants.
  */
+import axios from 'axios';
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { addRestaurants } from '../../redux/actions/restaurants';
+import { serverBaseUrl } from '../../variables';
 
 class ListOfRestaurants extends React.Component {
+  // gets the restaurants from the server and updates the redux state
+  getRestaurants = async () => {
+    let restaurants = [];
+
+    await axios.get(`http://${serverBaseUrl}/RestaurantsInfo/getRestaurants`, { // calls to the server
+      params: this.props.state.searchInfo, // provides the search parameters
+    }).then((response) => { // if the restaurants are returned...
+      restaurants = response.data; // set restaurants varaible to the list of restaurants
+    }).catch((error) => { // if there is an error...
+      // find a way to display the error later
+      console.log(error);
+    });
+
+    this.props.addRestaurants(restaurants); // add the restaurants to the redux state
+  }
+
   render() {
-    return <div></div>;
+    return <div><button onClick={this.getRestaurants}></button></div>;
   }
 }
 
-export default ListOfRestaurants;
+const mapStateToProps = (state, props) => ({ state: state, properties: props });
+
+export default connect(mapStateToProps, { addRestaurants })(ListOfRestaurants);
