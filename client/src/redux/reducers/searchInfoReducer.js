@@ -1,10 +1,7 @@
-// default state is for testing purposes until location is received from the user
-const defaultState = {
-  location: 'United States',
-};
-
-const searchInfoReducer = (state = defaultState, action) => {
+const searchInfoReducer = (state = {}, action) => {
   switch(action.type) {
+    case 'UPDATE_SEARCH_INFO': // add the provided search parameters to the redux state
+      return { ...state, ...action.payload };
     default:
       return state;
   }
