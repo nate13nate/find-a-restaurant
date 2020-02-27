@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 
 import history from '../../history';
 import { addRestaurants } from '../../redux/actions/restaurants';
+import RestaurantsTable from './RestaurantsTable';
 import { serverBaseUrl } from '../../variables';
 
 class ListOfRestaurants extends React.Component {
@@ -22,9 +23,13 @@ class ListOfRestaurants extends React.Component {
     }).then((response) => { // if the restaurants are returned...
       restaurants = response.data; // set restaurants varaible to the list of restaurants
     }).catch((error) => { // if there is an error...
-      // find a way to display the error later
-      console.log(error);
+      restaurants = [{ errorMessage: error.message, error: error }];
     });
+
+    // if there are no restaurants
+    if (restaurants.length === 0) {
+      restaurants = [{ errorMessage: 'There are no restaurants which match your search parameters. Please change them and try again.' }];
+    }
 
     this.props.addRestaurants(restaurants); // add the restaurants to the redux state
   }
@@ -35,11 +40,13 @@ class ListOfRestaurants extends React.Component {
     if (typeof this.props.state.searchInfo.location === 'undefined' &&
       (typeof this.props.state.searchInfo.latitude === 'undefined' || typeof this.props.state.searchInfo.longitude === 'undefined')) {
       history.push('/GetLocation');
+    } else { // if there is enough information to access the api, then get the restaurants from the api
+      this.getRestaurants();
     }
   }
 
   render() {
-    return <div><button onClick={this.getRestaurants}></button></div>;
+    return <div><RestaurantsTable /></div>;
   }
 }
 
