@@ -1,3 +1,3 @@
-const yelpFusionToken = 'Mvo2QTUxWOtTekDksTnqmLvdHOTzY28k8UYuH9svFl1RQgCzwbyHy9T2G38MXVhfMv9NEpBDSrbChPKMvVtAh4tw9CCIg6sYD7_koosGyBxQ0iaZLDJP7mLO8OVOXnYx';
+const YELP_FUSION_TOKEN = 'Mvo2QTUxWOtTekDksTnqmLvdHOTzY28k8UYuH9svFl1RQgCzwbyHy9T2G38MXVhfMv9NEpBDSrbChPKMvVtAh4tw9CCIg6sYD7_koosGyBxQ0iaZLDJP7mLO8OVOXnYx';
 
-module.exports = { yelpFusionToken };
+module.exports = { YELP_FUSION_TOKEN };
