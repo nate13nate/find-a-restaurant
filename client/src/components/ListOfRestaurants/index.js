@@ -9,11 +9,46 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import history from '../../history';
+import LoadMap from '../LoadMap';
 import { addRestaurants } from '../../redux/actions/restaurants';
 import RestaurantsTable from './RestaurantsTable';
 import { serverBaseUrl } from '../../variables';
 
 class ListOfRestaurants extends React.Component {
+  createMapBounds = () => {
+    const mapBounds = this.props.state.restaurants.map(restaurant => [
+      restaurant.coordinates.latitude,
+      restaurant.coordinates.longitude,
+    ]);
+
+    if (typeof this.props.state.searchInfo.latitude !== 'undefined' && typeof this.props.state.searchInfo.longitude !== 'undefined') {
+      mapBounds.push([
+        this.props.state.searchInfo.latitude,
+        this.props.state.searchInfo.longitude,
+      ]);
+    }
+
+    return mapBounds;
+  }
+
+  createMapInfo = () => {
+    const mapInfo = this.props.state.restaurants.map(restaurant => ({
+      id: restaurant.id,
+      name: restaurant.name,
+      location: [restaurant.coordinates.latitude, restaurant.coordinates.longitude],
+    }));
+
+    if (typeof this.props.state.searchInfo.latitude !== 'undefined' && typeof this.props.state.searchInfo.longitude !== 'undefined') {
+      mapInfo.push({
+        id: 'yourlocation',
+        name: 'Your Location',
+        location: [this.props.state.searchInfo.latitude, this.props.state.searchInfo.longitude]
+      });
+    }
+
+    return mapInfo;
+  }
+
   // gets the restaurants from the server and updates the redux state
   getRestaurants = async () => {
     let restaurants = [];
@@ -46,7 +81,12 @@ class ListOfRestaurants extends React.Component {
   }
 
   render() {
-    return <div><RestaurantsTable /></div>;
+    return (
+      <div>
+        <RestaurantsTable />
+        {this.props.state.restaurants.length === 0 ? null : <LoadMap bounds={this.createMapBounds()} restaurantsInfo={this.createMapInfo()} />}
+      </div>
+    );
   }
 }
 
