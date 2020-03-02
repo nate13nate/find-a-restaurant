@@ -1,7 +1,12 @@
+/**
+ * A map, which can be either a map of a group of points or a
+ * map of just one point
+ */
 import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 class LoadMap extends React.Component {
+  // returns the marker(s) for the map
   createMapMarkers = () => {
     if (typeof this.props.restaurantsInfo !== 'undefined') {
       return this.props.restaurantsInfo.map(restaurant => (
