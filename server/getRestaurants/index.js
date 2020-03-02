@@ -22,7 +22,7 @@ async function getRestaurants(parameters) {
       Authorization: `Bearer ${YELP_FUSION_TOKEN}`,
     },
   }).then((response) => { // if the restaurants are gotten successfully
-    restaurants = response.data.businesses; // set restaurants to the list of restaurants
+    restaurants = response.data; // set restaurants to the list of restaurants; also includes total restaurants that matched the search requirements
   }).catch((error) => { // if there is an error in getting the restaurants
     restaurants = { errorMessage: error.message, error: error }; // return the error message seperately, and then the rest of the error info
   });

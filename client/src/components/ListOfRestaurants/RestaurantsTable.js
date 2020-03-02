@@ -41,8 +41,8 @@ class RestaurantsTable extends React.Component {
     }
 
     // if there has been an error with fetching the restaurants, display the error message
-    if (typeof this.props.state.restaurants[0].errorMessage !== 'undefined') {
-      return <div>{this.props.state.restaurants[0].errorMessage}</div>;
+    if (typeof this.props.state.restaurants.errorMessage !== 'undefined') {
+      return <div>{this.props.state.restaurants.errorMessage}</div>;
     }
 
     return (

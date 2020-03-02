@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import pageInfoReducer from './pageInfoReducer';
 import restaurantsReducer from './restaurantsReducer';
 import searchInfoReducer from './searchInfoReducer';
 
@@ -9,6 +10,7 @@ const fakeReducer = () => {
 }
 
 export default combineReducers({
+  pageInfo: pageInfoReducer,
   restaurants: restaurantsReducer, // the total list of restaurants pulled from the Yelp API
   searchInfo: searchInfoReducer, // the parameters for searching through the list of restaurants
   sortInfo: fakeReducer, // the parameters for sorting the list of restaurants
