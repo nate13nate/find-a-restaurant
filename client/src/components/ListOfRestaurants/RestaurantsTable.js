@@ -5,11 +5,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import history from '../../history';
+
 class RestaurantsTable extends React.Component {
   // returns the table records for the restaurant information
   displayRestaurants() {
     return this.props.state.restaurants.map(restaurant => ( // loops through the list of restaurants and returns a row for each restaurant
-      <tr key={restaurant.id}>
+      <tr className='restaurantListRow' key={restaurant.id} onClick={() => { history.push(`/RestaurantInfo/${restaurant.id}`); }}>
         <td>{restaurant.name}</td>
         <td>{this.restaurantCategoriesToString(restaurant.categories)}</td>
         <td>{restaurant.price}</td>
