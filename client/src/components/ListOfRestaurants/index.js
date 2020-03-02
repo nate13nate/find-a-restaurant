@@ -15,12 +15,14 @@ import RestaurantsTable from './RestaurantsTable';
 import { serverBaseUrl } from '../../variables';
 
 class ListOfRestaurants extends React.Component {
+  // returns a list of latitudes and longitudes which a map will have to contain
   createMapBounds = () => {
     const mapBounds = this.props.state.restaurants.map(restaurant => [
       restaurant.coordinates.latitude,
       restaurant.coordinates.longitude,
     ]);
 
+    // if the user has a recorded latitude and longitude, add it to the bounds
     if (typeof this.props.state.searchInfo.latitude !== 'undefined' && typeof this.props.state.searchInfo.longitude !== 'undefined') {
       mapBounds.push([
         this.props.state.searchInfo.latitude,
@@ -31,6 +33,7 @@ class ListOfRestaurants extends React.Component {
     return mapBounds;
   }
 
+  // returns info needed to make markers on a map
   createMapInfo = () => {
     const mapInfo = this.props.state.restaurants.map(restaurant => ({
       id: restaurant.id,
@@ -38,6 +41,7 @@ class ListOfRestaurants extends React.Component {
       location: [restaurant.coordinates.latitude, restaurant.coordinates.longitude],
     }));
 
+    // if the user has a recorded latitude and longitude, add that information for a marker
     if (typeof this.props.state.searchInfo.latitude !== 'undefined' && typeof this.props.state.searchInfo.longitude !== 'undefined') {
       mapInfo.push({
         id: 'yourlocation',
