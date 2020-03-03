@@ -9,6 +9,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import history from '../../history';
+import LoadMap from '../LoadMap';
 import { clearRestaurant, setRestaurant } from '../../redux/actions/viewedRestaurant';
 import RestaurantInfoTable from './RestaurantInfoTable';
 import { serverBaseUrl } from '../../variables';
@@ -46,6 +47,13 @@ class RestaurantInfo extends React.Component {
 
     return (
       <div>
+        <img alt={`${this.props.state.viewedRestaurant.name} Restaurant`} src={this.props.state.viewedRestaurant.image_url}></img>
+        <LoadMap
+          center={[this.props.state.viewedRestaurant.coordinates.latitude, this.props.state.viewedRestaurant.coordinates.longitude]}
+          zoom='13'
+          restaurantName={this.props.state.viewedRestaurant.name}
+          usersLocation={typeof this.props.state.searchInfo.latitude === 'undefined' ? undefined : [this.props.state.searchInfo.latitude, this.props.state.searchInfo.longitude]}
+        />
         <RestaurantInfoTable />
         <button onClick={() => { this.props.clearRestaurant(); }}>Back</button>
       </div>
