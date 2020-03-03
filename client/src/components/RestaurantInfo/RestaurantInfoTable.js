@@ -90,39 +90,47 @@ class RestaurantInfoTable extends React.Component {
       <tbody>
         <tr>
           <td>Name</td>
-          <td>{restaurant.name}</td>
+          <td>{restaurant.name || 'None Provided'}</td>
         </tr>
         <tr>
           <td>Is It Currently Open?</td>
-          <td>{restaurant.hours[0].is_open_now ? 'Yes' : 'No'}</td>
+          <td>{typeof restaurant.hours === 'undefined' ? 'No Information Provided' : ((restaurant.hours[0].is_open_now ? 'Yes' : 'No') || 'None Provided')}</td>
         </tr>
         <tr>
           <td>Restaurant Type</td>
-          <td>{restaurantCategoriesToString(restaurant.categories)}</td>
+          <td>{typeof restaurant.categories === 'undefined' ? 'None Provided' : restaurantCategoriesToString(restaurant.categories)}</td>
         </tr>
         <tr>
           <td>Price</td>
-          <td>{restaurant.price}</td>
+          <td>{restaurant.price || 'None Provided'}</td>
         </tr>
         <tr>
           <td>Rating</td>
-          <td>{restaurant.rating}</td>
+          <td>{restaurant.rating || 'None Provided'}</td>
         </tr>
         <tr>
           <td>Hours</td>
-          <td>{this.hoursArrayToJsx(restaurant.hours[0].open)}</td>
+          <td>{typeof restaurant.hours === 'undefined' || typeof restaurant.hours[0].open === 'undefined' ? 'None Provided' : this.hoursArrayToJsx(restaurant.hours[0].open)}</td>
         </tr>
         <tr>
           <td>Address</td>
-          <td>{restaurant.location.display_address[0]} <br /> {restaurant.location.display_address[1]}</td>
+          <td>
+            {restaurant.location.display_address[0] || 'None Provided'}
+            {typeof restaurant.location.display_address[0] === 'undefined' ? '' : <br />}
+            {restaurant.location.display_address[1] || ''}
+          </td>
         </tr>
         <tr>
           <td>Phone Number</td>
-          <td>{restaurant.display_phone}</td>
+          <td>{restaurant.display_phone || 'None Provided'}</td>
         </tr>
         <tr>
           <td>Website</td>
-          <td><a href={restaurant.url} rel='external noopener noreferrer' target='_blank'>{restaurant.name}</a></td>
+          <td>
+            <a href={restaurant.url || null} rel='external noopener noreferrer' target='_blank'>
+              {typeof restaurant.url === 'undefined' ? 'None Provided' : restaurant.name}
+            </a>
+          </td>
         </tr>
       </tbody>
     );
