@@ -21,3 +21,17 @@ export const getRestaurants = async (searchInfo, addRestaurants) => {
 
   addRestaurants(restaurants); // add the restaurants to the redux state
 }
+
+// takes the restaurant categories as the api provides them and returns them as a user-friendly string
+// categories: Array of Objects; each object contains a title value, which is a user-friendly version of the category
+export function restaurantCategoriesToString(categories) {
+  let categoriesAsString = '';
+
+  // concatenates all of the titles of the categories together
+  categories.forEach(function (category, index) {
+    // if the current category is the last one in the array, add just the title; otherwise, add a semicolon and space
+    categoriesAsString += index === categories.length - 1 ? category.title : `${category.title}; `;
+  });
+
+  return categoriesAsString;
+}
