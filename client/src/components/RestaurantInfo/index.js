@@ -8,7 +8,8 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setRestaurant } from '../../redux/actions/viewedRestaurant';
+import history from '../../history';
+import { clearRestaurant, setRestaurant } from '../../redux/actions/viewedRestaurant';
 import RestaurantInfoTable from './RestaurantInfoTable';
 import { serverBaseUrl } from '../../variables';
 
@@ -30,16 +31,28 @@ class RestaurantInfo extends React.Component {
     this.getRestaurant(); // once the component mounts, get the restaurant from the yelp fusion api
   }
 
+  componentDidUpdate() {
+    // if the component was updated so that there is no viewed restaurant, then the page will be sent to the ListOfRestaurants page
+    if (typeof this.props.state.viewedRestaurant.id === 'undefined') {
+      history.push('/');
+    }
+  }
+
   render() {
     // if the restaurant hasn't been gotten yet, show the page is loading
     if (typeof this.props.state.viewedRestaurant.id === 'undefined') {
       return <div>Loading...</div>;
     }
 
-    return <div><RestaurantInfoTable /></div>;
+    return (
+      <div>
+        <RestaurantInfoTable />
+        <button onClick={() => { this.props.clearRestaurant(); }}>Back</button>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state, props) => ({ state, properties: props });
 
-export default connect(mapStateToProps, { setRestaurant })(RestaurantInfo);
+export default connect(mapStateToProps, { clearRestaurant, setRestaurant })(RestaurantInfo);
