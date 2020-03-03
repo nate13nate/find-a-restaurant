@@ -5,6 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { restaurantCategoriesToString } from '../../functions';
 import history from '../../history';
 
 class RestaurantsTable extends React.Component {
@@ -13,27 +14,13 @@ class RestaurantsTable extends React.Component {
     return this.props.state.restaurants.map(restaurant => ( // loops through the list of restaurants and returns a row for each restaurant
       <tr className='restaurantListRow' key={restaurant.id} onClick={() => { history.push(`/RestaurantInfo/${restaurant.id}`); }}>
         <td>{restaurant.name}</td>
-        <td>{this.restaurantCategoriesToString(restaurant.categories)}</td>
+        <td>{restaurantCategoriesToString(restaurant.categories)}</td>
         <td>{restaurant.price}</td>
         <td>{restaurant.rating}</td>
         <td>{`${(restaurant.distance * .000621371).toFixed(1)} miles` /* Converts the api's distance in meters to miles */}</td>
         <td>{restaurant.is_closed ? 'No' : 'Yes'}</td>
       </tr>
     ));
-  }
-
-  // takes the restaurant categories as the api provides them and returns them as a user-friendly string
-  // categories: Array of Objects; each object contains a title value, which is a user-friendly version of the category
-  restaurantCategoriesToString(categories) {
-    let categoriesAsString = '';
-
-    // concatenates all of the titles of the categories together
-    categories.forEach(function (category, index) {
-      // if the current category is the last one in the array, add just the title; otherwise, add a semicolon and space
-      categoriesAsString += index === categories.length - 1 ? category.title : `${category.title}; `;
-    });
-
-    return categoriesAsString;
   }
 
   render() {
