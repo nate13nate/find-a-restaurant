@@ -23,8 +23,8 @@ class PageButtons extends React.Component {
 
     // for each group of 50 restaurants, create a page button for them
     // disable the button for the page the user is currently on
-    for (let i = 1; i <= Math.ceil(this.props.state.pageInfo.totalRestaurants / 50); i += 1) {
-      pageButtonsJsx.push(<button key={i} onClick={() => { this.props.changePageNum(i); }} disabled={this.props.state.pageInfo.pageNum === i}>{i}</button>);
+    for (let i = 1; i <= Math.ceil(this.props.state.pageInfo.totalRestaurants / 25); i += 1) {
+      pageButtonsJsx.push(<button className='pageButton' key={i} onClick={() => { this.props.changePageNum(i); }} disabled={this.props.state.pageInfo.pageNum === i}>{i}</button>);
     }
 
     return pageButtonsJsx;
@@ -34,11 +34,13 @@ class PageButtons extends React.Component {
     // if the restaurants need to be updated, call to the database for the restaurants
     if (this.props.state.pageInfo.needToUpdateRestaurants) {
       getRestaurants(this.props.state.searchInfo, this.props.addRestaurants);
+    } else if (this.props.state.pageInfo.pageNum > Math.ceil(this.props.state.pageInfo.totalRestaurants / 25)) {
+      this.props.changePageNum(Math.ceil(this.props.state.pageInfo.totalRestaurants / 25));
     }
   }
 
   render() {
-    return <div>{this.renderPageButtons()}</div>;
+    return <div id='pageButtonsDiv'>{this.renderPageButtons()}</div>;
   }
 }
 

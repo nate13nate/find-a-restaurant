@@ -28,44 +28,44 @@ class FilterOptions extends React.Component {
 
   render() {
     return (
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <label htmlFor='priceInput'>Price:</label>
-              <select id='priceInput' value={this.state.price} onChange={(e) => { this.setState({ price: e.target.value }); }}>
-                <option label='All' value={null}></option>
-                <option label='$' value='1'></option>
-                <option label='$$' value='2'></option>
-                <option label='$$$' value='3'></option>
-                <option label='$$$$' value='4'></option>
-              </select>
-            </td>
-            <td>
-              <label htmlFor='radiusInput'>Radius (in miles):</label>
-              <input
-                id='radiusInput'
-                max='25'
-                onChange={(e) => { this.setState({ radius: Math.round(e.target.value * 1609.34) }); }}
-                type='number'
-                value={Math.round(this.state.radius * 0.000621371)}
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor='openInput'>Include Restaurants That are Closed? (check the box to include them)</label>
-              <input checked={!this.state.open_now} onChange={() => { this.setState({ open_now: !this.state.open_now }); }} type='checkbox'></input>
-            </td>
-          </tr>
-          <tr>
-            <td><input onClick={() => {
-              this.needToUpdateRestaurants = true;
-              this.props.updateSearchInfo(this.state);
-            }} type='submit'></input></td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <table id='filterOptionsTable'>
+          <tbody>
+            <tr>
+              <td className='filterOptionsTableCell'>
+                <label htmlFor='priceInput'>Price:</label>
+                <select id='priceInput' value={this.state.price} onChange={(e) => { this.setState({ price: e.target.value }); }}>
+                  <option label='All' value={null}></option>
+                  <option label='$' value='1'></option>
+                  <option label='$$' value='2'></option>
+                  <option label='$$$' value='3'></option>
+                  <option label='$$$$' value='4'></option>
+                </select>
+              </td>
+              <td className='filterOptionsTableCell'>
+                <label htmlFor='radiusInput'>Radius (in miles):</label>
+                <input
+                  id='radiusInput'
+                  max='25'
+                  onChange={(e) => { this.setState({ radius: Math.round(e.target.value * 1609.34) }); }}
+                  type='number'
+                  value={Math.round(this.state.radius * 0.000621371)}
+                ></input>
+              </td>
+            </tr>
+            <tr>
+              <td className='filterOptionsTableCell'>
+                <label htmlFor='openInput'>Include Restaurants That are Closed? <br /> (check the box to include them)</label>
+                <input checked={!this.state.open_now} onChange={() => { this.setState({ open_now: !this.state.open_now }); }} type='checkbox'></input>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button onClick={() => {
+          this.needToUpdateRestaurants = true;
+          this.props.updateSearchInfo(this.state);
+        }}>Submit</button>
+      </div >
     );
   }
 }

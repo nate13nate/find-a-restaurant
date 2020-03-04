@@ -1,0 +1,27 @@
+button#restaurantInfoBackButton {
+  margin: 20px;
+  margin-bottom: 50px;
+}
+
+div#restaurantInfoDiv {
+  text-align: center;
+}
+
+table#hoursTable {
+  width: 100%;
+}
+
+table#restaurantInfoTable {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+img#restaurantImage {
+  display: block;
+  height: 500px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
