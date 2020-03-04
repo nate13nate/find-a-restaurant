@@ -39,18 +39,24 @@ class GetLocation extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Select a Location or Allow this Site to Access Your Location</h1>
-        {this.state.errorMessage}
+      <div id='getLocationDiv'>
+        <h1>In order to find restaurants, we need a location from you.</h1>
+        <p className='eitherOr'>Either</p>
 
-        <input type='text' placeholder='Type in a Location' value={this.state.locationInputValue}
+        <h2>Provide your own location</h2>
+        <input id='locationInput' type='text' placeholder='Type in a Location' value={this.state.locationInputValue}
           onChange={(e) => { this.setState({ locationInputValue: e.target.value }); }}></input>
-        <button onClick={() => {
+        <button id='locationInputButton' onClick={() => {
             // if there is a location provided, record the location; if there is no location provided, then prompt the user for a location
-            this.state.locationInputValue !== '' ? this.updateSearchInfoWithProvidedLocation() : this.setState({ errorMessage: <div>Please provide a location.</div> });
+            this.state.locationInputValue !== '' ? this.updateSearchInfoWithProvidedLocation() : this.setState({ errorMessage: <div id='errorMessage'><text id='errorText'>Please provide a location.</text></div> });
           }}>Use This Location</button>
 
+        <p className='eitherOr'>or</p>
+
+        <h2>Allow us to find your location</h2>
         <button onClick={async () => { getLocation(navigator, this.props.updateSearchInfo); }}>Get Your Location</button>
+
+        {this.state.errorMessage}
       </div>
     );
   }

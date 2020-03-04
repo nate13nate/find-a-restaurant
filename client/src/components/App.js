@@ -7,11 +7,12 @@ import GetLocation from './GetLocation';
 import history from '../history';
 import ListOfRestaurants from './ListOfRestaurants';
 import RestaurantInfo from './RestaurantInfo';
+import '../stylesheets/index.css';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div id='appDiv'>
         <Router history={history}>
           <Switch>
             <Route path='/' component={ListOfRestaurants} exact />

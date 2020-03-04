@@ -35,7 +35,7 @@ class RestaurantsTable extends React.Component {
     }
 
     return (
-      <table>
+      <table id='restaurantsTable'>
         <thead>
           <tr>
             <th>Name</th>

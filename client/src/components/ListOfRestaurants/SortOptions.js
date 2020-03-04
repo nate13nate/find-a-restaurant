@@ -8,7 +8,7 @@ import { getRestaurants } from '../../functions';
 import { addRestaurants } from '../../redux/actions/restaurants';
 import { updateSearchInfo } from '../../redux/actions/searchInfo';
 
-class FilterOptions extends React.Component {
+class SortOptions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,7 +32,7 @@ class FilterOptions extends React.Component {
 
   render() {
     return (
-      <select onChange={this.prepareForRestaurantCall} value={this.props.searchInfo.sort_by}>
+      <select id='sortSelect' onChange={this.prepareForRestaurantCall} value={this.props.searchInfo.sort_by}>
         <option label='Best Match' value='best_match'></option>
         <option label='Rating' value='rating'></option>
         <option label='Review Count' value='review_count'></option>
@@ -44,4 +44,4 @@ class FilterOptions extends React.Component {
 
 const mapStateToProps = (state) => ({ searchInfo: state.searchInfo });
 
-export default connect(mapStateToProps, { addRestaurants, updateSearchInfo })(FilterOptions);
+export default connect(mapStateToProps, { addRestaurants, updateSearchInfo })(SortOptions);

@@ -1,0 +1,82 @@
+html {
+  background-image: url('../images/WebsiteBackground.png');
+  background-size: cover;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+body {
+  height: calc(100% - 100px);
+  margin: 10vw;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+button {
+  background-color: rgb(183, 240, 98);
+  border-color: darkgreen;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: none;
+  height: 30px;
+  font-weight: bold;
+  width: 150px;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  background-color: rgb(201, 238, 145);
+  cursor: pointer;
+}
+
+button:active {
+  background-color: rgb(183, 240, 98);
+}
+
+input[type=text] {
+  height: 20px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  padding: 5px;
+  width: 300px;
+}
+
+.leaflet-container {
+  height: 400px;
+  margin: auto;
+  margin-bottom: 30px;
+  width: 75%;
+}
+
+tr.restaurantListRow:hover {
+  cursor: pointer;
+}
+
+div#root {
+  height: 100%;
+}
+
+div#appDiv {
+  height: 100%;
+}
+
+div#errorMessage {
+  background-color: rgb(255, 238, 212);
+  border-color: red;
+  border-style: solid;
+  border-width: 3px;
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  height: 100px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+text#errorText {
+  margin: auto;
+}

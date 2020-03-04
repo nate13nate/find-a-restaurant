@@ -67,11 +67,11 @@ class ListOfRestaurants extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id='listOfRestaurantsDiv'>
+        {this.props.state.restaurants.length === 0 ? null : <LoadMap bounds={this.createMapBounds()} restaurantsInfo={this.createMapInfo()} />}
         <SearchArea />
         <RestaurantsTable />
         <PageButtons />
-        {this.props.state.restaurants.length === 0 ? null : <LoadMap bounds={this.createMapBounds()} restaurantsInfo={this.createMapInfo()} />}
       </div>
     );
   }

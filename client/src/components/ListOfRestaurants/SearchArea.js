@@ -17,10 +17,20 @@ class SearchArea extends React.Component {
 
     /**
      * currentComponentShown - JSX; contains either null, the FilterOptions component, or the SortOptions component
+     * currentComponentShownStyle - Object; contains the object's styling; will be changed if the filter or sort buttons are pressed
+     * filterStyle - Object; contains the button's background color (if adjusted) depending on if the button's component is open or not
+     * sortStyle - Object; see above
      * submitDisabled - boolean; contains whether the submit button is disabled or not
      * submitText - String; contains the text for the submit button
      */
-    this.state = { currentComponentShown: null, submitDisabled: false, submitText: 'Submit' };
+    this.state = {
+      currentComponentShown: null,
+      currentComponentShownStyle: {},
+      filterStyle: {},
+      sortStyle: {},
+      submitDisabled: false,
+      submitText: 'Submit'
+    };
   }
 
   // when the text input is submitted
@@ -37,9 +47,11 @@ class SearchArea extends React.Component {
     }
 
     return (
-      <div>
+      <div id='searchAreaDiv'>
         <input
+          type='text'
           value={this.props.state.searchInfo.term || ''}
+          placeholder='Search the Restaurants Here...'
           onChange={(e) => { this.props.updateSearchInfo({ term: e.target.value }); }}
           onKeyUp={(e) => { if (e.keyCode === 13) { this.onSubmit(); } }}
         ></input>
@@ -47,10 +59,36 @@ class SearchArea extends React.Component {
 
         <br />
 
-        <button onClick={() => { this.setState({ currentComponentShown: <FilterOptions /> }); }}>Filter Options</button>
-        <button onClick={() => { this.setState({ currentComponentShown: <SortOptions /> }); }}>Sort Options</button>
-        <br />
-        {this.state.currentComponentShown}
+        <div id='optionsDiv'>
+          <button
+            className='optionsButton'
+            onClick={() => {
+              this.setState({
+                currentComponentShown: <FilterOptions />,
+                currentComponentShownStyle: { borderColor: 'darkgreen', borderStyle: 'solid', borderWidth: '1px', padding: '5px' },
+                filterStyle: { backgroundColor: 'rgb(167, 226, 79)' },
+                sortStyle: {}
+              });
+            }}
+            style={this.state.filterStyle}
+          >Filter Options</button>
+          <button
+            className='optionsButton'
+            onClick={() => {
+              this.setState({
+                currentComponentShown: <SortOptions />,
+                currentComponentShownStyle: { borderColor: 'darkgreen', borderStyle: 'solid', borderWidth: '1px', padding: '5px' },
+                filterStyle: {},
+                sortStyle: { backgroundColor: 'rgb(167, 226, 79)' }
+              });
+            }}
+            style={this.state.sortStyle}
+          >Sort Options</button>
+        </div>
+
+        <div id='currentComponentShown' style={this.state.currentComponentShownStyle}>
+          {this.state.currentComponentShown}
+        </div>
       </div>
     );
   }

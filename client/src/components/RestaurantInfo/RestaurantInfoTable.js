@@ -74,7 +74,7 @@ class RestaurantInfoTable extends React.Component {
     ));
 
     return (
-      <table>
+      <table id='hoursTable'>
         <tbody>
           {timeInfoJsx}
         </tbody>
@@ -87,7 +87,7 @@ class RestaurantInfoTable extends React.Component {
     const restaurant = this.props.state.viewedRestaurant; // for more concise code
 
     return (
-      <tbody>
+      <tbody align='center'>
         <tr>
           <td>Name</td>
           <td>{restaurant.name || 'None Provided'}</td>
@@ -138,15 +138,12 @@ class RestaurantInfoTable extends React.Component {
 
   render() {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Restaurant Details</th>
-          </tr>
-        </thead>
-
-        {this.renderRestaurantInfo()}
-      </table>
+      <div>
+        <h2>Restaurant Details</h2>
+        <table align='center' id='restaurantInfoTable'>
+          {this.renderRestaurantInfo()}
+        </table>
+      </div>
     );
   }
 }

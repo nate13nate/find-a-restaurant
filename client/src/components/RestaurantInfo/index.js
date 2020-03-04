@@ -47,8 +47,9 @@ class RestaurantInfo extends React.Component {
     }
 
     return (
-      <div>
-        <img alt={`${this.props.state.viewedRestaurant.name} Restaurant`} src={this.props.state.viewedRestaurant.image_url}></img>
+      <div id='restaurantInfoDiv'>
+        <h1>{this.props.state.viewedRestaurant.name}</h1>
+        <img alt={`${this.props.state.viewedRestaurant.name} Restaurant`} id='restaurantImage' src={this.props.state.viewedRestaurant.image_url}></img>
         <LoadMap
           center={[this.props.state.viewedRestaurant.coordinates.latitude, this.props.state.viewedRestaurant.coordinates.longitude]}
           zoom='13'
@@ -56,7 +57,7 @@ class RestaurantInfo extends React.Component {
           usersLocation={typeof this.props.state.searchInfo.latitude === 'undefined' ? undefined : [this.props.state.searchInfo.latitude, this.props.state.searchInfo.longitude]}
         />
         <RestaurantInfoTable />
-        <button onClick={() => { this.props.clearRestaurant(); }}>Back</button>
+        <button id='restaurantInfoBackButton' onClick={() => { this.props.clearRestaurant(); }}>Back</button>
       </div>
     );
   }
