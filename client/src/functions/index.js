@@ -16,7 +16,6 @@ export const getLocation = (navigator, callback) => {
 // gets the restaurants from the server and updates the redux state
 export const getRestaurants = async (searchInfo, addRestaurants) => {
   let restaurants = [];
-  console.log(searchInfo);
 
   await axios.get(`http://${serverBaseUrl}/RestaurantsInfo/getRestaurants`, { // calls to the server
     params: searchInfo, // provides the search parameters
