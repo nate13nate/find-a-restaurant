@@ -5,33 +5,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { mapStateToProps, restaurantCategoriesToString } from '../../functions';
+import history from '../../history';
+
 class RestaurantsTable extends React.Component {
   // returns the table records for the restaurant information
   displayRestaurants() {
     return this.props.state.restaurants.map(restaurant => ( // loops through the list of restaurants and returns a row for each restaurant
-      <tr key={restaurant.id}>
+      <tr className='restaurantListRow' key={restaurant.id} onClick={() => { history.push(`/RestaurantInfo/${restaurant.id}`); }}>
         <td>{restaurant.name}</td>
-        <td>{this.restaurantCategoriesToString(restaurant.categories)}</td>
+        <td>{restaurantCategoriesToString(restaurant.categories)}</td>
         <td>{restaurant.price}</td>
         <td>{restaurant.rating}</td>
         <td>{`${(restaurant.distance * .000621371).toFixed(1)} miles` /* Converts the api's distance in meters to miles */}</td>
         <td>{restaurant.is_closed ? 'No' : 'Yes'}</td>
       </tr>
     ));
-  }
-
-  // takes the restaurant categories as the api provides them and returns them as a user-friendly string
-  // categories: Array of Objects; each object contains a title value, which is a user-friendly version of the category
-  restaurantCategoriesToString(categories) {
-    let categoriesAsString = '';
-
-    // concatenates all of the titles of the categories together
-    categories.forEach(function (category, index) {
-      // if the current category is the last one in the array, add just the title; otherwise, add a semicolon and space
-      categoriesAsString += index === categories.length - 1 ? category.title : `${category.title}; `;
-    });
-
-    return categoriesAsString;
   }
 
   render() {
@@ -41,12 +30,12 @@ class RestaurantsTable extends React.Component {
     }
 
     // if there has been an error with fetching the restaurants, display the error message
-    if (typeof this.props.state.restaurants[0].errorMessage !== 'undefined') {
-      return <div>{this.props.state.restaurants[0].errorMessage}</div>;
+    if (typeof this.props.state.restaurants.errorMessage !== 'undefined') {
+      return <div>{this.props.state.restaurants.errorMessage}</div>;
     }
 
     return (
-      <table>
+      <table id='restaurantsTable'>
         <thead>
           <tr>
             <th>Name</th>
@@ -64,7 +53,5 @@ class RestaurantsTable extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({ state, properties: props });
 
 export default connect(mapStateToProps)(RestaurantsTable);

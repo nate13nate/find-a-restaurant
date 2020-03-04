@@ -1,0 +1,74 @@
+button.optionsButton {
+  margin: 0;
+  border-radius: 0;
+  border-width: 1px;
+  width: 50%;
+}
+
+button.pageButton {
+  margin: 10px;
+  margin-bottom: 0;
+  width: 50px;
+}
+
+td.filterOptionsTableCell {
+  width: 50%;
+}
+
+tr.filterOptionsTableRow {
+  margin-bottom: 100px;
+}
+
+div#currentComponentShown {
+  background-color: rgb(167, 226, 79);
+}
+
+div#listOfRestaurantsDiv {
+  align-content: center;
+  text-align: center;
+}
+
+div#pageButtonsDiv {
+  margin-bottom: 50px;
+}
+
+div#searchAreaDiv {
+  margin-bottom: 20px;
+}
+
+div#optionsDiv {
+  margin-top: 20px;
+}
+
+select#sortSelect {
+  height: 30px;
+  width: 200px;
+}
+
+table#filterOptionsTable {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  width: 100%;
+}
+
+table#restaurantsTable, table#restaurantsTable th, table#restaurantsTable td {
+  border: 2px solid darkgreen;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+table#restaurantsTable {
+  width: 100%;
+}
+
+table#restaurantsTable th {
+  background-color: rgb(173, 238, 76);
+}
+
+.restaurantListRow {
+  background-color: rgb(183, 240, 98);
+}
+
+.restaurantListRow:hover {
+  background-color: rgb(201, 238, 145);
+}

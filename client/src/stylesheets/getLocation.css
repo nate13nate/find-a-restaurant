@@ -1,0 +1,12 @@
+p.eitherOr {
+  font-weight: bold;
+}
+
+button#locationInputButton {
+  margin-top: 5px;
+}
+
+div#getLocationDiv {
+  height: 100%;
+  text-align: center;
+}

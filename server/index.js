@@ -15,8 +15,9 @@ app.get('/RestaurantsInfo/getRestaurants', async function (req, res) {
 });
 
 // get specific information on a single restaurant from yelp api
-app.get('/RestaurantsInfo/getARestaurant', function (req, res) {
-  res.send(getARestaurant());
+app.get('/RestaurantsInfo/getARestaurant/:id', async function (req, res) {
+  const restaurant = await getARestaurant(req.params.id);
+  res.send(restaurant);
 });
  
 app.listen(5000);

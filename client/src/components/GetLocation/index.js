@@ -8,6 +8,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { getLocation, mapStateToProps } from '../../functions';
 import history from '../../history';
 import { updateSearchInfo } from '../../redux/actions/searchInfo';
 
@@ -20,22 +21,6 @@ class GetLocation extends React.Component {
      * locationInputValue - String; the value inside the input that receives a location
      */
     this.state = { errorMessage: null, locationInputValue: '' };
-  }
-
-  // gets the location using HTML5 geolocation and references a callback function to update the redux state
-  getLocation = () => {
-    navigator.geolocation.getCurrentPosition(this.updateSearchInfoWithLatAndLong, (error) => {
-      if (error.code === error.PERMISSION_DENIED) { // if the function failed because permission was denied, display a custom error message
-        this.setState({ errorMessage: <div>You denied access to your location. Either go into site settings and change your permissions, or input a location.</div>})
-      } else { // if the function failed for a different reason, display the error message
-        this.setState({ errorMessage: <div>{error.message}</div>});
-      }
-    });
-  }
-
-  // updates the redux state searchInfo by adding a latitude and a longitude
-  updateSearchInfoWithLatAndLong = (location) => {
-    this.props.updateSearchInfo({ latitude: location.coords.latitude, longitude: location.coords.longitude });
   }
 
   // updates the redux state searchInfo by adding a location
@@ -54,23 +39,27 @@ class GetLocation extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Select a Location or Allow this Site to Access Your Location</h1>
-        {this.state.errorMessage}
+      <div id='getLocationDiv'>
+        <h1>In order to find restaurants, we need a location from you.</h1>
+        <p className='eitherOr'>Either</p>
 
-        <input type='text' placeholder='Type in a Location' value={this.state.locationInputValue}
+        <h2>Provide your own location</h2>
+        <input id='locationInput' type='text' placeholder='Type in a Location' value={this.state.locationInputValue}
           onChange={(e) => { this.setState({ locationInputValue: e.target.value }); }}></input>
-        <button onClick={() => {
+        <button id='locationInputButton' onClick={() => {
             // if there is a location provided, record the location; if there is no location provided, then prompt the user for a location
-            this.state.locationInputValue !== '' ? this.updateSearchInfoWithProvidedLocation() : this.setState({ errorMessage: <div>Please provide a location.</div> });
+            this.state.locationInputValue !== '' ? this.updateSearchInfoWithProvidedLocation() : this.setState({ errorMessage: <div id='errorMessage'><text id='errorText'>Please provide a location.</text></div> });
           }}>Use This Location</button>
 
-        <button onClick={this.getLocation}>Get Your Location</button>
+        <p className='eitherOr'>or</p>
+
+        <h2>Allow us to find your location</h2>
+        <button onClick={async () => { getLocation(navigator, this.props.updateSearchInfo); }}>Get Your Location</button>
+
+        {this.state.errorMessage}
       </div>
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({ state, properties: props });
 
 export default connect(mapStateToProps, { updateSearchInfo })(GetLocation);
