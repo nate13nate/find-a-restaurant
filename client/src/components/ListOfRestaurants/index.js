@@ -7,12 +7,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getRestaurants } from '../../functions';
+import { getRestaurants, mapStateToProps } from '../../functions';
 import history from '../../history';
 import LoadMap from '../LoadMap';
 import PageButtons from './PageButtons';
 import { addRestaurants } from '../../redux/actions/restaurants';
 import RestaurantsTable from './RestaurantsTable';
+import SearchArea from './SearchArea';
 
 class ListOfRestaurants extends React.Component {
   // returns a list of latitudes and longitudes which a map will have to contain
@@ -67,6 +68,7 @@ class ListOfRestaurants extends React.Component {
   render() {
     return (
       <div>
+        <SearchArea />
         <RestaurantsTable />
         <PageButtons />
         {this.props.state.restaurants.length === 0 ? null : <LoadMap bounds={this.createMapBounds()} restaurantsInfo={this.createMapInfo()} />}
@@ -74,7 +76,5 @@ class ListOfRestaurants extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({ state: state, properties: props });
 
 export default connect(mapStateToProps, { addRestaurants })(ListOfRestaurants);

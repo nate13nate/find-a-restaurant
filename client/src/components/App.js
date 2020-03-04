@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Router, Switch } from 'react-router-dom';
 
+import { mapStateToProps } from '../functions';
 import GetLocation from './GetLocation';
 import history from '../history';
 import ListOfRestaurants from './ListOfRestaurants';
@@ -22,7 +23,5 @@ class App extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({ state, properties: props });
 
 export default connect(mapStateToProps)(App);

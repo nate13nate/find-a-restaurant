@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getRestaurants } from '../../functions';
+import { getRestaurants, mapStateToProps } from '../../functions';
 import { changePageNum } from '../../redux/actions/pageInfo';
 import { addRestaurants } from '../../redux/actions/restaurants';
 
@@ -41,7 +41,5 @@ class PageButtons extends React.Component {
     return <div>{this.renderPageButtons()}</div>;
   }
 }
-
-const mapStateToProps = (state, props) => ({ state, properties: props });
 
 export default connect(mapStateToProps, { addRestaurants, changePageNum })(PageButtons);

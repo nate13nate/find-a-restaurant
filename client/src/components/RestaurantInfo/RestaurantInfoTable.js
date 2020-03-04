@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { restaurantCategoriesToString } from '../../functions';
+import { mapStateToProps, restaurantCategoriesToString } from '../../functions';
 
 class RestaurantInfoTable extends React.Component {
   // takes the hour array from the yelp fusion api and turns it into a jsx element
@@ -150,7 +150,5 @@ class RestaurantInfoTable extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({ state, properties: props });
 
 export default connect(mapStateToProps)(RestaurantInfoTable);

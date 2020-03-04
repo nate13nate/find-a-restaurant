@@ -43,8 +43,9 @@ class LoadMap extends React.Component {
     // check to see if usersLocation is provided
     // if it isn't provided, there's no need for bounds, since the only location provided will be the restaurant's
     // if it is provided, then bounds will be the user's location and the restaurant's location
-    const bounds = this.props.bounds || (typeof this.props.usersLocation === 'undefined' ? null : [this.props.usersLocation, this.props.center]);
-    const center = bounds === null ? this.props.center : null;
+    const bounds = (typeof this.props.bounds === 'undefined' || this.props.bounds.length === 1 ? undefined : this.props.bounds)
+      || (typeof this.props.usersLocation === 'undefined' ? null : [this.props.usersLocation, this.props.center]);
+    const center = bounds === null ? (typeof this.props.bounds !== 'undefined' && this.props.bounds.length === 1 ? this.props.bounds[0] : this.props.center) : null;
     const zoom = center === null ? null : 13;
 
     return (
