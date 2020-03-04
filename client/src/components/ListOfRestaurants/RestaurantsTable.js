@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { restaurantCategoriesToString } from '../../functions';
+import { mapStateToProps, restaurantCategoriesToString } from '../../functions';
 import history from '../../history';
 
 class RestaurantsTable extends React.Component {
@@ -53,7 +53,5 @@ class RestaurantsTable extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({ state, properties: props });
 
 export default connect(mapStateToProps)(RestaurantsTable);

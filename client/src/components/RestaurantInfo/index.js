@@ -8,6 +8,7 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { mapStateToProps } from '../../functions';
 import history from '../../history';
 import LoadMap from '../LoadMap';
 import { clearRestaurant, setRestaurant } from '../../redux/actions/viewedRestaurant';
@@ -60,7 +61,5 @@ class RestaurantInfo extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, props) => ({ state, properties: props });
 
 export default connect(mapStateToProps, { clearRestaurant, setRestaurant })(RestaurantInfo);
